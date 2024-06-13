@@ -1,45 +1,69 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-   up (queryInterface, Sequelize) {
-  return Promise.all([
-      queryInterface.changeColumn('articles', 'id', {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
-      }),
-    queryInterface.changeColumn('articles', 'name', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.changeColumn('articles', 'name', {
       type: Sequelize.STRING,
       allowNull: false
-    }),
-    queryInterface.changeColumn('articles', 'slug', {
+    });
+
+    await queryInterface.changeColumn('articles', 'slug', {
       type: Sequelize.STRING,
       allowNull: false,
       unique: true
-    }),
-    queryInterface.changeColumn('articles', 'image', {
+    });
+
+    await queryInterface.changeColumn('articles', 'image', {
       type: Sequelize.STRING,
       allowNull: false
-    }),
-    queryInterface.changeColumn('articles', 'body', {
+    });
+
+    await queryInterface.changeColumn('articles', 'body', {
       type: Sequelize.TEXT,
       allowNull: false
-    }),
-    queryInterface.changeColumn('articles', 'published', {
+    });
+
+    await queryInterface.changeColumn('articles', 'published', {
       type: Sequelize.DATE,
       allowNull: false
-    }),
-    queryInterface.changeColumn('articles', 'author_id', {
+    });
+
+    await queryInterface.changeColumn('articles', 'author_id', {
       type: Sequelize.INTEGER
-    })
-  ])
+    });
   },
 
-   down (queryInterface) {
-    return Promise.all([
-        queryInterface.dropTable('articles')
-    ])
+  down: async (queryInterface, Sequelize) => {
+    // Revert changes as needed
+    await queryInterface.changeColumn('articles', 'name', {
+      type: Sequelize.STRING,
+      allowNull: true // Adjust as per initial schema
+    });
+
+    await queryInterface.changeColumn('articles', 'slug', {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: false // Revert unique constraint if it wasn't initially there
+    });
+
+    await queryInterface.changeColumn('articles', 'image', {
+      type: Sequelize.STRING,
+      allowNull: true // Adjust as per initial schema
+    });
+
+    await queryInterface.changeColumn('articles', 'body', {
+      type: Sequelize.TEXT,
+      allowNull: true // Adjust as per initial schema
+    });
+
+    await queryInterface.changeColumn('articles', 'published', {
+      type: Sequelize.DATE,
+      allowNull: true // Adjust as per initial schema
+    });
+
+    await queryInterface.changeColumn('articles', 'author_id', {
+      type: Sequelize.INTEGER,
+      allowNull: true // Adjust as per initial schema
+    });
   }
 };
