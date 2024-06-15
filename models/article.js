@@ -4,7 +4,6 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Article extends Model {
     static associate(models) {
-      // Article belongs to Author
       this.belongsTo(models.Author, {
         foreignKey: 'author_id',
         as: 'author'
