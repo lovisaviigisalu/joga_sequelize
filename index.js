@@ -5,7 +5,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const Sequelize = require("sequelize");
-// Update the connection string to include the password
 const sequelize = new Sequelize("mysql://user:user@localhost:3306/joga_sequelize");
 
 sequelize
@@ -17,10 +16,8 @@ sequelize
         console.error("Unable to connect: ", err);
     });
 
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to sequelize application" });
-});
-
+const articleRouter = require('./routes/article');
+app.use('/', articleRouter);
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
