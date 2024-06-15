@@ -1,14 +1,17 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Authors extends Model {
+  class Author extends Model {
     static associate(models) {
+      // Author has many Articles
+      this.hasMany(models.Article, {
+        foreignKey: 'author_id',
+        as: 'articles'
+      });
     }
   }
-  Authors.init({
+  Author.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -21,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Authors'
+    modelName: 'Author',
   });
-  return Authors;
+  return Author;
 };

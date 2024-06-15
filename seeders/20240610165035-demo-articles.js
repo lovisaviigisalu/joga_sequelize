@@ -10,6 +10,7 @@ module.exports = {
          image: 'ashtanga.jpg',
          body: '<p> Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>',
          published: '2020-02-08 14:23:45',
+         author_id: 1,
          createdAt: new Date(),
          updatedAt: new Date()
        }]),
@@ -19,6 +20,7 @@ module.exports = {
        image: 'morning.jpg',
        body: '<p> Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>',
        published: '2020-08-02 10:51:21',
+       author_id: 3,
        createdAt: new Date(),
        updatedAt: new Date()
      }]),
@@ -28,6 +30,7 @@ module.exports = {
        image: 'yoga-teacher.jpg',
        body: '<p> Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>',
        published: '2023-11-03 11:50:11',
+       author_id: 1,
        createdAt: new Date(),
        updatedAt: new Date()
      }]),
