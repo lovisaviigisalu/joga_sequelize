@@ -16,19 +16,30 @@ const getAllArticles = async (req, res) => {
     }
 };
 
-const getArticleBySlug = async (req, res) => {
-    try {
-        const article = await models.Article.findOne({
-            where: { slug: req.params.slug },
-            include: [{
+const getArticleBySlug =  (req, res) => {
+    models.Article.findOne({
+        where: {
+            slug: req.params.slug
+        },
+        include: [
+            {
                 model: models.Author,
-                as: 'author'
-            }]
-        });
-        return res.status(200).json({ article });
-    } catch (error) {
-        return res.status(500).send(error.message);
-    }
+            },
+            {
+                model: models.Tag,
+                through: {
+                    model: models.AritcleTag
+                }
+            }
+        ]
+    })
+        .then(article => {
+            console.log(article)
+            return res.status(200).json({ article })
+        })
+        .catch(error => {
+            return res.status(500).send(error.message)
+        })
 };
 const getArticlesByAuthor = async (req, res) => {
     try {

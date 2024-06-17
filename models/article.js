@@ -5,8 +5,15 @@ module.exports = (sequelize, DataTypes) => {
   class Article extends Model {
     static associate(models) {
       this.belongsTo(models.Author, {
-        foreignKey: 'author_id',
-        as: 'author'
+        foreignKey: {
+          name: 'Author_id',
+          field: 'author_id'
+        }
+      });
+      this.belongsToMany(models.Tags, {
+        through: models.ArticleTags,
+        foreignKey: 'articleId',
+        otherKey: 'tagId'
       });
     }
   }
